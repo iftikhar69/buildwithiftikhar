@@ -59,4 +59,4 @@ If you have any questions regarding this Privacy Policy, please contact:
 
 Website: https://iftu-portfolio.netlify.app/
 
-Email: your-email@example.com
+Email: iftikharali081144@gmail.com
