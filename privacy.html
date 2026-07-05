@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Build with Iftikhar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0B0E12;
+    --grid-line: rgba(240,180,41,0.06);
+    --surface: #151A21;
+    --surface-hover: #1B222B;
+    --border: rgba(255,255,255,0.08);
+    --text: #ECEFF3;
+    --text-dim: #8992A0;
+    --accent: #F0B429;
+    --accent-dim: rgba(240,180,41,0.35);
+    --mono: 'JetBrains Mono', monospace;
+    --display: 'Space Grotesk', sans-serif;
+    --body: 'Inter', sans-serif;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--body);
+    min-height:100vh;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  .grid-backdrop{
+    position:fixed;
+    inset:0;
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 10%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 10%, transparent 75%);
+    z-index:0;
+    animation: drift 40s linear infinite;
+  }
+
+  @keyframes drift{
+    0%{ background-position: 0 0, 0 0; }
+    100%{ background-position: 480px 0, 0 480px; }
+  }
+
+  .glow{
+    position:fixed;
+    top:-25%;
+    left:50%;
+    transform:translateX(-50%);
+    width:800px;
+    height:800px;
+    background: radial-gradient(circle, rgba(240,180,41,0.08) 0%, transparent 65%);
+    z-index:0;
+    pointer-events:none;
+  }
+
+  main{
+    position:relative;
+    z-index:1;
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+  }
+
+  header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 32px clamp(24px, 6vw, 72px);
+  }
+
+  .mark{
+    font-family:var(--mono);
+    font-size:13px;
+    letter-spacing:0.08em;
+    color:var(--text-dim);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    text-decoration:none;
+  }
+
+  .mark .dot{
+    width:8px; height:8px;
+    border-radius:50%;
+    background:var(--accent);
+    box-shadow: 0 0 12px var(--accent);
+    animation: pulse 2.2s ease-in-out infinite;
+  }
+
+  @keyframes pulse{
+    0%,100%{ opacity:1; transform:scale(1); }
+    50%{ opacity:0.5; transform:scale(0.8); }
+  }
+
+  .status{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--text-dim);
+    letter-spacing:0.05em;
+  }
+
+  .page-hero{
+    padding: 24px clamp(24px, 6vw, 72px) 0;
+    max-width:900px;
+  }
+
+  .back-link{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--text-dim);
+    text-decoration:none;
+    letter-spacing:0.05em;
+    margin-bottom:40px;
+    transition: color 0.2s ease, gap 0.2s ease;
+  }
+  .back-link:hover{ color:var(--accent); gap:12px; }
+  .back-link:focus-visible{ outline:2px solid var(--accent); outline-offset:4px; }
+
+  .eyebrow{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--accent);
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    margin-bottom:20px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    opacity:0;
+    animation: rise 0.7s ease forwards 0.05s;
+  }
+  .eyebrow::before{
+    content:'';
+    width:28px;
+    height:1px;
+    background:var(--accent);
+  }
+
+  h1{
+    font-family:var(--display);
+    font-weight:700;
+    font-size: clamp(38px, 6vw, 64px);
+    line-height:1.02;
+    letter-spacing:-0.02em;
+    opacity:0;
+    animation: rise 0.8s ease forwards 0.15s;
+  }
+
+  @keyframes rise{
+    from{ opacity:0; transform:translateY(16px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+
+  .meta-line{
+    margin-top:20px;
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--text-dim);
+    opacity:0;
+    animation: rise 0.8s ease forwards 0.3s;
+  }
+
+  .content{
+    flex:1;
+    max-width:900px;
+    padding: 56px clamp(24px, 6vw, 72px) 80px;
+  }
+
+  .article{
+    padding:28px 0;
+    border-top:1px solid var(--border);
+    opacity:0;
+    transform:translateY(14px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .article.visible{ opacity:1; transform:translateY(0); }
+
+  .article:first-child{ border-top:1px solid var(--border); }
+
+  .article-head{
+    display:flex;
+    align-items:baseline;
+    gap:16px;
+    margin-bottom:14px;
+  }
+
+  .article-index{
+    font-family:var(--mono);
+    font-size:13px;
+    color:var(--accent);
+    letter-spacing:0.05em;
+    flex-shrink:0;
+  }
+
+  .article h2{
+    font-family:var(--display);
+    font-size:20px;
+    font-weight:600;
+    letter-spacing:-0.01em;
+  }
+
+  .article p, .article li{
+    font-size:15px;
+    line-height:1.75;
+    color:var(--text-dim);
+    max-width:680px;
+  }
+
+  .article ul{
+    margin-top:10px;
+    padding-left:20px;
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+
+  .article p + p{ margin-top:12px; }
+
+  .article a{
+    color:var(--accent);
+    text-decoration:none;
+    border-bottom:1px solid var(--accent-dim);
+  }
+  .article a:hover{ border-bottom-color:var(--accent); }
+
+  footer{
+    position:relative;
+    z-index:1;
+    border-top:1px solid var(--border);
+    padding: 40px clamp(24px, 6vw, 72px) 48px;
+    background: linear-gradient(180deg, transparent, rgba(0,0,0,0.2));
+  }
+
+  .footer-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:24px;
+    margin-bottom:32px;
+  }
+
+  .footer-label{
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--text-dim);
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+  }
+
+  .links{
+    list-style:none;
+    display:grid;
+    grid-template-columns:repeat(3, minmax(180px, 1fr));
+    gap:16px;
+    perspective:1000px;
+  }
+
+  .links li a{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    padding:20px 22px;
+    border:1px solid var(--border);
+    border-radius:10px;
+    background:var(--surface);
+    color:var(--text);
+    text-decoration:none;
+    font-family:var(--body);
+    font-size:15px;
+    font-weight:500;
+    transition: transform 0.15s ease, border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+    overflow:hidden;
+    transform-style:preserve-3d;
+    will-change:transform;
+  }
+
+  .links li a.current{
+    border-color:var(--accent-dim);
+    background:var(--surface-hover);
+  }
+
+  .links li a::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background: linear-gradient(120deg, transparent, rgba(240,180,41,0.08), transparent);
+    transform:translateX(-100%);
+    transition: transform 0.6s ease;
+    pointer-events:none;
+  }
+
+  .links li a::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    border-radius:inherit;
+    background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(240,180,41,0.20), transparent 60%);
+    opacity:0;
+    transition: opacity 0.3s ease;
+    pointer-events:none;
+  }
+
+  .links li a:hover::before{ transform:translateX(100%); }
+  .links li a:hover::after{ opacity:1; }
+
+  .links li a:hover{
+    border-color:var(--accent-dim);
+    background:var(--surface-hover);
+    box-shadow: 0 18px 40px -20px rgba(240,180,41,0.35);
+  }
+
+  .links li a:focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:3px;
+  }
+
+  .link-index{
+    font-family:var(--mono);
+    font-size:11px;
+    color:var(--accent);
+    letter-spacing:0.05em;
+  }
+
+  .link-arrow{
+    position:absolute;
+    top:20px;
+    right:20px;
+    font-size:16px;
+    color:var(--text-dim);
+    transition: transform 0.25s ease, color 0.25s ease;
+  }
+
+  .links li a:hover .link-arrow{
+    transform:translate(3px,-3px);
+    color:var(--accent);
+  }
+
+  .copyright{
+    margin-top:36px;
+    font-family:var(--mono);
+    font-size:12px;
+    color:var(--text-dim);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+
+  @media (max-width: 640px){
+    .links{ grid-template-columns:1fr; }
+    header{ padding: 24px 20px; }
+    .page-hero{ padding: 20px 20px 0; }
+    .content{ padding: 40px 20px 60px; }
+    footer{ padding: 32px 20px 36px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *, *::before, *::after{
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+    .grid-backdrop{ animation:none; }
+    .article{ opacity:1; transform:none; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="grid-backdrop"></div>
+  <div class="glow"></div>
+
+  <main>
+    <header>
+      <a href="index.html" class="mark"><span class="dot"></span>BUILD_WITH_IFTIKHAR</a>
+      <div class="status">STATUS: POLICY</div>
+    </header>
+
+    <section class="page-hero">
+      <a href="index.html" class="back-link">&larr; Back home</a>
+      <div class="eyebrow">Legal</div>
+      <h1>Privacy Policy</h1>
+      <p class="meta-line">Last updated: July 2026</p>
+    </section>
+
+    <section class="content">
+
+      <div class="article">
+        <div class="article-head">
+          <span class="article-index">01</span>
+          <h2>Overview</h2>
+        </div>
+        <p>This policy explains what information Build with Iftikhar collects when you visit this site, how it's used, and the choices you have. By using this site, you agree to the practices described below.</p>
+      </div>
+
+      <div class="article">
+        <div class="article-head">
+          <span class="article-index">02</span>
+          <h2>Information collected</h2>
+        </div>
+        <p>This site does not require you to create an account or submit personal information to browse its pages. Information may still be collected in the following ways:</p>
+        <ul>
+          <li>Basic analytics data, such as pages visited, browser type, and approximate location, used to understand how the site is used.</li>
+          <li>Information you provide directly, such as your name and email address, if you reach out through the contact page.</li>
+        </ul>
+      </div>
+
+      <div class="article">
+        <div class="article-head">
+          <span class="article-index">03</span>
+          <h2>How information is used</h2>
+        </div>
+        <p>Any information collected is used to operate and improve this site, respond to messages sent through the contact page, and understand general visitor trends. Information is never sold to third parties.</p>
+      </div>
+
+      <div class="article">
+        <div class="article-head">
+          <span class="article-index">04</span>
+          <h2>Cookies</h2>
+        </div>
+        <p>This site may use minimal cookies or similar technologies for basic functionality and analytics. You can disable cookies through your browser settings; doing so should not affect your ability to browse this site.</p>
+      </div>
+
+      <div class="article">
+        <div class="article-head">
+          <span class="article-index">05</span>
+          <h2>Third-party services</h2>
+        </div>
+        <p>This site may link to third-party services (such as social media profiles) or use third-party tools for hosting and analytics. Those services have their own privacy policies, and this policy does not cover their practices.</p>
+      </div>
+
+      <div class="article">
+        <div class="article-head">
+          <span class="article-index">06</span>
+          <h2>Your rights</h2>
+        </div>
+        <p>You can request details about any information held about you, or ask for it to be corrected or deleted, by reaching out through the <a href="contact.html">contact page</a>.</p>
+      </div>
+
+      <div class="article">
+        <div class="article-head">
+          <span class="article-index">07</span>
+          <h2>Changes to this policy</h2>
+        </div>
+        <p>This policy may be updated occasionally to reflect changes to the site or applicable law. The date at the top of this page reflects the most recent revision.</p>
+      </div>
+
+      <div class="article">
+        <div class="article-head">
+          <span class="article-index">08</span>
+          <h2>Contact</h2>
+        </div>
+        <p>Questions about this policy can be sent through the <a href="contact.html">contact page</a>.</p>
+      </div>
+
+    </section>
+
+    <footer>
+      <div class="footer-top">
+        <div class="footer-label">Continue exploring / 03 pages</div>
+      </div>
+      <ul class="links">
+        <li>
+          <a href="privacy.html" class="tilt-card current">
+            <span class="link-index">01</span>
+            Privacy Policy
+            <span class="link-arrow">&#8599;</span>
+          </a>
+        </li>
+        <li>
+          <a href="terms.html" class="tilt-card">
+            <span class="link-index">02</span>
+            Terms of Service
+            <span class="link-arrow">&#8599;</span>
+          </a>
+        </li>
+        <li>
+          <a href="contact.html" class="tilt-card">
+            <span class="link-index">03</span>
+            Contact
+            <span class="link-arrow">&#8599;</span>
+          </a>
+        </li>
+      </ul>
+      <div class="copyright">
+        <span>&copy; <span id="year"></span> Build with Iftikhar. All rights reserved.</span>
+        <span>Crafted with care.</span>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (!reduceMotion) {
+      document.querySelectorAll('.tilt-card').forEach((card) => {
+        card.addEventListener('mousemove', (e) => {
+          const r = card.getBoundingClientRect();
+          const x = e.clientX - r.left;
+          const y = e.clientY - r.top;
+          const rx = ((y / r.height) - 0.5) * -8;
+          const ry = ((x / r.width) - 0.5) * 8;
+          card.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+          card.style.setProperty('--mx', `${(x / r.width) * 100}%`);
+          card.style.setProperty('--my', `${(y / r.height) * 100}%`);
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = '';
+        });
+      });
+
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+
+      document.querySelectorAll('.article').forEach((el) => io.observe(el));
+    } else {
+      document.querySelectorAll('.article').forEach((el) => el.classList.add('visible'));
+    }
+  </script>
+</body>
+</html>
