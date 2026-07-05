@@ -51,4 +51,4 @@ Build With Iftikhar
 
 Website: https://iftu-portfolio.netlify.app/
 
-Email: your-email@example.com
+Email: iftikharali081144@gmail.com
